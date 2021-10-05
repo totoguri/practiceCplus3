@@ -54,48 +54,118 @@ using std::endl;
 //}
 
 
-#include <cstring>
-class Person {
-private:
-	char* name;
+//#include <cstring>
+//class Person {
+//private:
+//	char* name;
+//
+//public:
+//	Person(const char* myname) {
+//		name = new char[strlen(myname) + 1];
+//		strcpy_s(name, strlen(myname)+1, myname);
+//	}
+//	~Person() {
+//		delete[]name;
+//	}
+//	void WhatYourName() const {
+//		cout << "My name is " << name << endl;
+//	}
+//};
+//
+//class UnivStudent : public Person {
+//private: 
+//	char* major;
+//
+//public:
+//	UnivStudent(const char* myname, const char* mymajor) : Person(myname) {
+//		major = new char[strlen(mymajor) + 1];
+//		strcpy_s(major, strlen(mymajor)+1, mymajor);
+//	}
+//	~UnivStudent() {
+//		delete[]major;
+//	}
+//	void WhoAreYou() const {
+//		WhatYourName();
+//		cout << "My major is " << major << endl << endl;
+//	}
+//};
+//
+//int main() {
+//	UnivStudent st1("Kim", "Mathematics");
+//	st1.WhoAreYou();
+//	UnivStudent st2("Hong", "Physics");
+//	st2.WhoAreYou();
+//	return 0;
+//}
 
+// p.304
+
+
+#include <cstring>
+class Computer {
+private:
+	char owner[50];
 public:
-	Person(const char* myname) {
-		name = new char[strlen(myname) + 1];
-		strcpy_s(name, strlen(myname)+1, myname);
+	Computer(const char* name) {
+		strcpy_s(owner, strlen(name) + 1, name);
 	}
-	~Person() {
-		delete[]name;
-	}
-	void WhatYourName() const {
-		cout << "My name is " << name << endl;
+	void Calculate() {
+		cout << "요청 내용을 계산합니다." << endl;
 	}
 };
 
-class UnivStudent : public Person {
-private: 
-	char* major;
-
+class NotebookComp : public Computer {
+private:
+	int Battery;
 public:
-	UnivStudent(const char* myname, const char* mymajor) : Person(myname) {
-		major = new char[strlen(mymajor) + 1];
-		strcpy_s(major, strlen(mymajor)+1, mymajor);
+	NotebookComp(const char* name, int initChag) : Computer(name), Battery(initChag) {}
+	void Charging() {
+		Battery += 5;
 	}
-	~UnivStudent() {
-		delete[]major;
+	void UseBattery() {
+		Battery -= 1;
 	}
-	void WhoAreYou() const {
-		WhatYourName();
-		cout << "My major is " << major << endl << endl;
+	void MovingCal() {
+		if (GetBatteryInfo() < 1) {
+			cout << "충전이 필요합니다." << endl;
+			return;
+		}
+		cout << "이동하면서 ";
+		Calculate();
+		UseBattery();
+	}
+	int GetBatteryInfo() {
+		return Battery;
+	}
+};
+
+class TabletNotebook : public NotebookComp {
+private:
+	char regstPenModel[50];
+public:
+	TabletNotebook(const char* name, int initChag, const char* pen) : NotebookComp(name, initChag) {
+		strcpy_s(regstPenModel, strlen(pen) + 1, pen);
+	}
+	void Write(const char* penInfo) {
+		if (GetBatteryInfo() < 1) {
+			cout << "충전이 필요합니다." << endl;
+			return;
+		}
+		if (strcmp(regstPenModel, penInfo) != 0) {
+			cout << "등록된 펜이 아닙니다.";
+			return;
+		}
+		cout << "필기 내용을 처리합니다." << endl;
+		UseBattery();
 	}
 };
 
 int main() {
-	UnivStudent st1("Kim", "Mathematics");
-	st1.WhoAreYou();
-	UnivStudent st2("Hong", "Physics");
-	st2.WhoAreYou();
+	NotebookComp nc("LEE", 5);
+	TabletNotebook tn("JEONG", 5, "ISE-241-242");
+	nc.MovingCal();
+	tn.Write("ISE-241-242");
 	return 0;
 }
 
-// p.304
+// p.307
