@@ -676,39 +676,267 @@ using std::endl;
 //}
 
 
-class AAA {
-private:
-	int num1;
-public:
-	AAA() : num1(0) {};
-	virtual void Func1() {
-		cout << "Func1" << endl;
-	}
-	virtual void Func2() {
-		cout << "Func2" << endl;
-	}
-};
-
-class BBB : public AAA {
-private:
-	int num2;
-public:
-	BBB() : AAA(), num2(0) {};
-	virtual void Func1() {
-		cout << "BBB::Func1" << endl;
-	}
-	void Func3() {
-		cout << "Func3" << endl;
-	}
-};
-
-int main() {
-	AAA* aptr = new AAA();
-	aptr->Func1();
-
-	BBB* bptr = new BBB();
-	bptr->Func1();
-	return 0;
-}
+//class AAA {
+//private:
+//	int num1;
+//public:
+//	AAA() : num1(0) {};
+//	virtual void Func1() {
+//		cout << "Func1" << endl;
+//	}
+//	virtual void Func2() {
+//		cout << "Func2" << endl;
+//	}
+//};
+//
+//class BBB : public AAA {
+//private:
+//	int num2;
+//public:
+//	BBB() : AAA(), num2(0) {};
+//	virtual void Func1() {
+//		cout << "BBB::Func1" << endl;
+//	}
+//	void Func3() {
+//		cout << "Func3" << endl;
+//	}
+//};
+//
+//int main() {
+//	AAA* aptr = new AAA();
+//	aptr->Func1();
+//
+//	BBB* bptr = new BBB();
+//	bptr->Func1();
+//	return 0;
+//}
 
 // p.380
+
+
+//class Point {
+//private:
+//	int xpos, ypos;
+//public:
+//	Point(int x = 0, int y = 0) : xpos(x), ypos(y) {
+//		//
+//	}
+//	void ShowPosition() const {
+//		cout << '[' << xpos << ", " << ypos << ']' << endl;
+//	}
+//	Point operator+(const Point& ref) {
+//		Point pos(xpos + ref.xpos, ypos + ref.ypos);
+//		return pos;
+//	}
+//};
+//
+//int main() {
+//	Point pos1(3, 4);
+//	Point pos2(10, 20);
+//	Point pos3 = pos1 + pos2;
+//
+//	pos1.ShowPosition();
+//	pos2.ShowPosition();
+//	pos3.ShowPosition();
+//	return 0;
+//}
+
+
+//class Point {
+//private:
+//	int xpos, ypos;
+//public:
+//	Point(int x = 0, int y = 0) : xpos(x), ypos(y) {
+//		//
+//	}
+//	void ShowPosition() const {
+//		cout << '[' << xpos << ", " << ypos << ']' << endl;
+//	}
+//	friend Point operator+(const Point& pos1, const Point& pos2);
+//};
+//
+//Point operator+(const Point& pos1, const Point& pos2) {
+//	Point pos(pos1.xpos + pos2.xpos, pos1.ypos + pos2.ypos);
+//	return pos;
+//}
+//
+//int main() {
+//	Point pos1(3, 4);
+//	Point pos2(10, 20);
+//	Point pos3 = pos1 + pos2;
+//
+//	pos1.ShowPosition();
+//	pos2.ShowPosition();
+//	pos3.ShowPosition();
+//	return 0;
+//}
+
+
+//class Point {
+//private:
+//	int xpos, ypos;
+//public:
+//	Point(int x = 0, int y = 0) : xpos(x), ypos(y) {
+//		//
+//	}
+//	void ShowPosition() const {
+//		cout << '[' << xpos << ", " << ypos << ']' << endl;
+//	}
+//	Point& operator++() {
+//		xpos += 1;
+//		ypos += 1;
+//		return *this;
+//	}
+//	friend Point& operator--(Point& ref);
+//};
+//
+//Point& operator--(Point& ref) {
+//	ref.xpos -= 1;
+//	ref.ypos -= 1;
+//	return ref;
+//}
+//
+//int main() {
+//	Point pos(1, 2);
+//	++pos;
+//	pos.ShowPosition();
+//	--pos;
+//	pos.ShowPosition();
+//
+//	++(++pos);
+//	pos.ShowPosition();
+//	--(--pos);
+//	pos.ShowPosition();
+//	return 0;
+//}
+
+
+//class Point {
+//private:
+//	int xpos, ypos;
+//public:
+//	Point(int x = 0, int y = 0) : xpos(x), ypos(y) {
+//		//
+//	}
+//	void ShowPosition() const {
+//		cout << '[' << xpos << ", " << ypos << ']' << endl;
+//	}
+//	Point& operator++() {
+//		xpos += 1;
+//		ypos += 1;
+//		return *this;
+//	}
+//	const Point operator++(int) {
+//		const Point retobj(xpos, ypos);
+//		xpos += 1;
+//		ypos += 1;
+//		return retobj;
+//	}
+//	friend Point& operator--(Point& ref);
+//	friend const Point operator--(Point& ref, int);
+//};
+//
+//Point& operator--(Point& ref) {
+//	ref.xpos -= 1;
+//	ref.ypos -= 1;
+//	return ref;
+//}
+//
+//const Point operator--(Point& ref, int) {
+//	const Point retobj(ref);
+//	ref.xpos -= 1;
+//	ref.ypos -= 1;
+//	return retobj;
+//}
+//
+//int main() {
+//	Point pos(3, 5);
+//	Point cpy;
+//	cpy = pos--;
+//	cpy.ShowPosition();
+//	pos.ShowPosition();
+//
+//	cpy = pos++;
+//	cpy.ShowPosition();
+//	pos.ShowPosition();
+//	return 0;
+//}
+
+
+//class Point {
+//private:
+//	int xpos, ypos;
+//public:
+//	Point(int x = 0, int y = 0) : xpos(x), ypos(y) {
+//		//
+//	}
+//	void ShowPosition() const {
+//		cout << '[' << xpos << ", " << ypos << ']' << endl;
+//	}
+//	Point operator*(int times) {
+//		Point pos(xpos * times, ypos * times);
+//		return pos;
+//	}
+//	friend Point operator*(int times, Point& ref);
+//};
+//
+//Point operator*(int times, Point& ref) {
+//	return ref * times;
+//}
+//
+//int main() {
+//	Point pos(1, 2);
+//	Point cpy;
+//
+//	cpy = pos * 3;
+//	cpy.ShowPosition();
+//
+//	cpy = pos * 3 * 2;
+//	cpy.ShowPosition();
+//	return 0;
+//}
+
+
+namespace mystd {
+	using namespace std;
+
+	class ostream {
+	public:
+		void operator<< (const char* str) {
+			printf("%s", str);
+		}
+		void operator<< (char str) {
+			printf("%c", str);
+		}
+		void operator<< (int num) {
+			printf("%d", num);
+		}
+		void operator<< (double e) {
+			printf("%g", e);
+		}
+		void operator<< (ostream& (*fp)(ostream& ostm)) {
+			fp(*this);
+		}
+	};
+
+	ostream& endl(ostream& ostm) {
+		ostm << '\n';
+		fflush(stdout);
+		return ostm;
+	}
+
+	ostream cout;
+}
+
+int main() {
+	using mystd::cout;
+	using mystd::endl;
+
+	cout << "Simple String";
+	cout << endl;
+	cout << 3.14;
+	cout << endl;
+	cout << 123;
+	endl(cout);
+	return 0;
+}
