@@ -331,28 +331,175 @@ using std::cin;
 //}
 
 
-class Test {
-	char c;
+//class Test {
+//	char c;
+//
+//public:
+//	Test(char c) {
+//		this->c = c;
+//		cout << "생성자 호출" << c << endl;
+//	}
+//	~Test()
+//	{
+//		cout << "소멸자 호출" << c << endl;
+//	}
+//};
+//
+//void simple_function() {
+//	Test b('b');
+//}
+//
+//int main() {
+//	Test a('a');
+//	simple_function();
+//	return 0;
+//}
+
+// p.98
+
+
+//#include <cstring>
+//class Photon_Cannon {
+//private:
+//	int hp, shield;
+//	int coord_x, coord_y;
+//	int damage;
+//
+//public:
+//	Photon_Cannon(int x, int y) {
+//		cout << "생성자 호출!" << endl;
+//		hp = shield = 100;
+//		coord_x = x;
+//		coord_y = y;
+//		damage = 20;
+//	}
+//	Photon_Cannon(const Photon_Cannon& pc) {
+//		cout << "복사생성자 호출!" << endl;
+//		hp = pc.hp;
+//		shield = pc.shield;
+//		coord_x = pc.coord_x;
+//		coord_y = pc.coord_y;
+//		damage = pc.damage;
+//	}
+//	void show_status() {
+//		cout << "Photon Cannon " << endl;
+//		cout << "Location: ( " << coord_x << ", " << coord_y << " )" << endl;
+//		cout << "HP: " << hp << endl;
+//	}
+//};
+//
+//int main() {
+//	Photon_Cannon pc1(3, 3);
+//	Photon_Cannon pc2(pc1);
+//	Photon_Cannon pc3 = pc2;
+//
+//	pc1.show_status();
+//	pc2.show_status();
+//}
+
+
+#include <cstring>
+class MyString {
+private:
+	char* string_content;
+	int string_length;
+	int memory_capacity;
 
 public:
-	Test(char c) {
-		this->c = c;
-		cout << "생성자 호출" << c << endl;
+	MyString(char c) {
+		string_content = new char[1];
+		string_content[0] = c;
 	}
-	~Test()
-	{
-		cout << "소멸자 호출" << c << endl;
+	MyString(const char* str) {
+		string_length = strlen(str);
+		string_content = new char[string_length];
+
+		for (int i = 0; i != string_length; i++) {
+			string_content[i] = str[i];
+		}
+	}
+	MyString(const MyString& str) {
+		string_length = str.string_length;
+		string_content = new char[string_length];
+
+		for (int i = 0; i != string_length; i++)
+			string_content[i] = str.string_content[i];
+	}
+	~MyString() {
+		delete[] string_content;
+	}
+	int length() const {
+		return string_length;
+	}
+	void print() const {
+		for (int i = 0; i != string_length; i++) {
+			cout << string_content[i];
+		}
+	}
+	void println() const {
+		for (int i = 0; i != string_length; i++) {
+			cout << string_content[i];
+		}
+		cout << endl;
+	}
+
+	MyString& assign(const MyString& str) {
+		if (str.string_length > memory_capacity) {
+			delete[] string_content;
+			string_content = new char[str.string_length];
+			memory_capacity = str.string_length;
+		}
+		for (int i = 0; i != str.string_length; i++) {
+			string_content[i] = str.string_content[i];
+		}
+		string_length = str.string_length;
+		return *this;
+	}
+
+	MyString& assign(const char* str) {
+		int str_length = strlen(str);
+		if (str_length > memory_capacity) {
+			delete[] string_content;
+			string_content = new char[str_length];
+			memory_capacity = str_length;
+		}
+		for (int i = 0; i != str_length; i++) {
+			string_content[i] = str[i];
+		}
+		string_length = str_length;
+		return *this;
+	}
+
+	int capacity() {
+		return memory_capacity;
+	}
+
+	void reserve(int size) {
+		if (size > memory_capacity) {
+			char* prev_string_content = string_content;
+			string_content = new char[size];
+			memory_capacity = size;
+
+			for (int i = 0; i != string_length; i++)
+				string_content[i] = prev_string_content[i];
+			delete[] prev_string_content;
+		}
+	}
+
+	char at(int i) const {
+		if (i >= string_length || i < 0)
+			return NULL;
+		else
+			return string_content[i];
 	}
 };
 
-void simple_function() {
-	Test b('b');
-}
-
 int main() {
-	Test a('a');
-	simple_function();
-	return 0;
-}
+	MyString str1("Hello World");
+	str1.reserve(30);
 
-// p.98
+	cout << "Capacity : " << str1.capacity() << endl;
+	cout << "String length : " << str1.length() << endl;
+
+	str1.println();
+}
