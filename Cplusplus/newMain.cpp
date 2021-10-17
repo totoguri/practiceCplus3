@@ -324,49 +324,244 @@ using std::cin;
 //}
 
 
+//#include <string>
+//#include <unordered_set>
+//
+//template <typename K>
+//void print_unordered_set(const std::unordered_set<K>& m) {
+//	for (const auto& elem : m) {
+//		cout << elem << endl;
+//	}
+//}
+//
+//template <typename K>
+//void is_exist(std::unordered_set<K>& s, K key) {
+//	auto itr = s.find(key);
+//	if (itr != s.end()) {
+//		cout << key << "가 존재" << endl;
+//	}
+//	else {
+//		cout << key << "가 없다" << endl;
+//	}
+//}
+//
+//int main() {
+//	std::unordered_set<std::string> s;
+//
+//	s.insert("hi");
+//	s.insert("my");
+//	s.insert("name");
+//	s.insert("is");
+//	s.insert("psi");
+//	s.insert("welcome");
+//	s.insert("to");
+//	s.insert("c++");
+//
+//	print_unordered_set(s);
+//	
+//	cout << " ---------------- " << endl;
+//	is_exist(s, std::string("c++"));
+//	is_exist(s, std::string("c"));
+//
+//	cout << " ----------------- " << endl;
+//	cout << "'hi'를 삭제" << endl;
+//	s.erase(s.find("hi"));
+//	is_exist(s, std::string("hi"));
+//}
+
+// p.556
+
+
+//#include <algorithm>
+//#include <vector>
+//
+//template <typename Iter>
+//void print(Iter begin, Iter end) {
+//	while (begin != end) {
+//		std::cout << *begin << " ";
+//		begin++;
+//	}
+//	std::cout << std::endl;
+//}
+//
+//struct int_compare {
+//	bool operator()(const int& a, const int& b) const {
+//		return a > b;
+//	}
+//};
+//
+//int main() {
+//	std::vector<int> vec;
+//	vec.push_back(5);
+//	vec.push_back(3);
+//	vec.push_back(1);
+//	vec.push_back(6);
+//	vec.push_back(4);
+//	vec.push_back(7);
+//	vec.push_back(2);
+//
+//	std::cout << "정렬 전 ----" << std::endl;
+//	print(vec.begin(), vec.end());
+//	std::sort(vec.begin(), vec.end(), int_compare());
+//
+//	std::cout << "정렬 후 ----" << std::endl;
+//	print(vec.begin(), vec.end());
+//}
+
+
+//#include <algorithm>
+//#include <vector>
+//
+//template <typename Iter>
+//void print(Iter begin, Iter end) {
+//	while (begin != end) {
+//		cout << *begin << " ";
+//		begin++;
+//	}
+//	cout << endl;
+//}
+//
+//int main() {
+//	std::vector<int> vec;
+//	vec.push_back(5);
+//	vec.push_back(3);
+//	vec.push_back(1);
+//	vec.push_back(6);
+//	vec.push_back(4);
+//	vec.push_back(7);
+//	vec.push_back(2);
+//
+//	cout << "정렬 전 ----" << endl;
+//	print(vec.begin(), vec.end());
+//	std::partial_sort(vec.begin(), vec.begin() + 3, vec.end());
+//
+//	cout << "정렬 후 ----" << endl;
+//	print(vec.begin(), vec.end());
+//}
+
+
+//#include <algorithm>
+//#include <functional>
+//#include <string>
+//#include <vector>
+//
+//template <typename Iter>
+//void print(Iter begin, Iter end) {
+//	while (begin != end) {
+//		cout << "[" << *begin << "] ";
+//		begin++;
+//	}
+//	cout << endl;
+//}
+//
+//struct User {
+//	std::string name;
+//	int age;
+//
+//	User(std::string name, int age) : name(name), age(age) {}
+//	bool operator<(const User& u) const { return age < u.age; }
+//};
+//
+//std::ostream& operator<<(std::ostream& o, const User& u) {
+//	o << u.name << " , " << u.age;
+//	return o;
+//}
+//
+//int main() {
+//	std::vector<User> vec;
+//	for (int i = 0; i < 100; i++) {
+//		std::string name = "";
+//		name.push_back('a' + i / 26);
+//		name.push_back('a' + i % 26);
+//		vec.push_back(User(name, static_cast<int>(rand() % 10)));
+//	}
+//
+//	std::vector<User> vec2 = vec;
+//	std::cout << "정렬 전 ----" << std::endl;
+//	print(vec.begin(), vec.end());
+//	
+//	std::sort(vec.begin(), vec.end());
+//
+//	std::cout << "정렬 후 ----" << std::endl;
+//	print(vec.begin(), vec.end());
+//	
+//	std::cout << "stable_sort의 경우 ---" << endl;
+//	std::stable_sort(vec2.begin(), vec2.end());
+//	print(vec2.begin(), vec2.end());
+//}
+
+
+//#include <algorithm>
+//#include <functional>
+//#include <string>
+//#include <vector>
+//
+//template <typename Iter>
+//void print(Iter begin, Iter end) {
+//	while (begin != end) {
+//		cout << "[" << *begin << "] ";
+//		begin++;
+//	}
+//	cout << endl;
+//}
+//
+//int main() {
+//	std::vector<int> vec;
+//	vec.push_back(5);
+//	vec.push_back(3);
+//	vec.push_back(1);
+//	vec.push_back(2);
+//	vec.push_back(3);
+//	vec.push_back(4);
+//
+//	cout << "처음 vec 상태 ------" << endl;
+//	print(vec.begin(), vec.end());
+//
+//	cout << "벡터에서 홀수인 원소 제거 ---" << endl;
+//	vec.erase(std::remove_if(vec.begin(), vec.end(), [](int i) -> bool {return i % 2 == 1; }),
+//		vec.end());
+//	print(vec.begin(), vec.end());
+//}
+
+
+#include <algorithm>
+#include <functional>
 #include <string>
-#include <unordered_set>
+#include <vector>
 
-template <typename K>
-void print_unordered_set(const std::unordered_set<K>& m) {
-	for (const auto& elem : m) {
-		cout << elem << endl;
+template <typename Iter>
+void print(Iter begin, Iter end) {
+	while (begin != end) {
+		cout << "[" << *begin << "] ";
+		begin++;
 	}
-}
-
-template <typename K>
-void is_exist(std::unordered_set<K>& s, K key) {
-	auto itr = s.find(key);
-	if (itr != s.end()) {
-		cout << key << "가 존재" << endl;
-	}
-	else {
-		cout << key << "가 없다" << endl;
-	}
+	cout << endl;
 }
 
 int main() {
-	std::unordered_set<std::string> s;
+	std::vector<int> vec;
+	vec.push_back(5);
+	vec.push_back(3);
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
+	vec.push_back(4);
 
-	s.insert("hi");
-	s.insert("my");
-	s.insert("name");
-	s.insert("is");
-	s.insert("psi");
-	s.insert("welcome");
-	s.insert("to");
-	s.insert("c++");
+	cout << "처음 vec 상태 ------" << endl;
+	print(vec.begin(), vec.end());
 
-	print_unordered_set(s);
-	
-	cout << " ---------------- " << endl;
-	is_exist(s, std::string("c++"));
-	is_exist(s, std::string("c"));
-
-	cout << " ----------------- " << endl;
-	cout << "'hi'를 삭제" << endl;
-	s.erase(s.find("hi"));
-	is_exist(s, std::string("hi"));
+	cout << "벡터에서 홀수인 원소 ---" << endl;
+	int num_erased = 0;
+	vec.erase(std::remove_if(vec.begin(), vec.end(),
+		[&num_erased](int i) {
+			if (num_erased >= 2)
+				return false;
+			else if (i % 2 == 1) {
+				num_erased++;
+				return true;
+			}
+			return false;
+		}),
+		vec.end());
+	print(vec.begin(), vec.end());
 }
-
-// p.556
